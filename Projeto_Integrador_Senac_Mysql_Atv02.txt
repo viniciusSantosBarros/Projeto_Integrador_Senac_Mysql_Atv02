@@ -1,0 +1,250 @@
+/*CREATE DATABASE projeto_integrador;
+
+USE projeto_integrador;*/
+
+/*tabela administrativo*/
+
+/*CREATE TABLE administrativo(
+id_administrativo INT AUTO_INCREMENT NOT NULL,
+notificações LONGTEXT NOT NULL,
+PRIMARY KEY (id_administrativo)
+);
+
+ALTER TABLE administrativo ADD COLUMN id_morador INT AFTER id_administrativo;
+
+ALTER TABLE administrativo ADD FOREIGN KEY (id_morador) REFERENCES moradores(id_morador);*/
+
+/*INSERT INTO administrativo (id_administrativo, notificações, id_morador)
+VALUES (1, 'Prezado(a) Senhor(a) Roberto Moreno Silva , Chegou ao conhecimento desta administração que no dia 25/05/2018, às 23:00, houve barulho excessivo vindo do seu apartamento. Identificamos que tal conduta constitui uma infração, de acordo com o(s) artigo(s) 1.336. Na qualidade de gestor deste Condomínio, no exercício de minhas atribuições elencadas pelo Código Civil e nas leis condominiais, envio a presente advertência diante da conduta inapropriada descrita acima. Diante disso, solicito sua intervenção e orientação aos moradores de sua unidade para que o fato não se repita, sob pena de multa por desrespeito aos estatutos do Condomínio.', 1);*/
+
+/*SELECT a.id_administrativo, a.id_morador, m.nome_completo, a.notificações
+FROM administrativo a
+JOIN moradores m
+ON a.id_morador = m.id_morador;*/
+
+/*INSERT INTO administrativo (id_administrativo, id_morador, notificações)
+VALUES (2, 4, 'Prezado(a) Senhor(a) Maria Rosa , Chegou ao conhecimento desta administração que no dia 01/07/2019, às 23:40, houve barulho excessivo vindo do seu apartamento. Identificamos que tal conduta constitui uma infração, de acordo com o(s) artigo(s) 1.336. Na qualidade de gestor deste Condomínio, no exercício de minhas atribuições elencadas pelo Código Civil e nas leis condominiais, envio a presente advertência diante da conduta inapropriada descrita acima. Diante disso, solicito sua intervenção e orientação aos moradores de sua unidade para que o fato não se repita, sob pena de multa por desrespeito aos estatutos do Condomínio.'),
+	   (3, 2, 'Prezado(a) Senhor(a) Thiago Oliveira , Chegou ao conhecimento desta administração que no dia 01/07/2022, às 22:00, houve barulho excessivo vindo do seu apartamento. Identificamos que tal conduta constitui uma infração, de acordo com o(s) artigo(s) 1.336. Na qualidade de gestor deste Condomínio, no exercício de minhas atribuições elencadas pelo Código Civil e nas leis condominiais, envio a presente advertência diante da conduta inapropriada descrita acima. Diante disso, solicito sua intervenção e orientação aos moradores de sua unidade para que o fato não se repita, sob pena de multa por desrespeito aos estatutos do Condomínio.');*/
+       
+/*INSERT INTO administrativo (id_administrativo, id_morador, notificações)
+	VALUES (4, 29, 'Prezado(a) Senhor(a) Nicole Brandão , Chegou ao conhecimento desta administração que no dia 24/04/2022, às 21:45, houve barulho excessivo vindo do seu apartamento. Identificamos que tal conduta constitui uma infração, de acordo com o(s) artigo(s) 1.336. Na qualidade de gestor deste Condomínio, no exercício de minhas atribuições elencadas pelo Código Civil e nas leis condominiais, envio a presente advertência diante da conduta inapropriada descrita acima. Diante disso, solicito sua intervenção e orientação aos moradores de sua unidade para que o fato não se repita, sob pena de multa por desrespeito aos estatutos do Condomínio.' ),
+           (5, 31, 'Prezado(a) Senhor(a) Celeste Silva , Chegou ao conhecimento desta administração que no dia 16/09/2022, às 22:15, houve barulho excessivo vindo do seu apartamento. Identificamos que tal conduta constitui uma infração, de acordo com o(s) artigo(s) 1.336. Na qualidade de gestor deste Condomínio, no exercício de minhas atribuições elencadas pelo Código Civil e nas leis condominiais, envio a presente advertência diante da conduta inapropriada descrita acima. Diante disso, solicito sua intervenção e orientação aos moradores de sua unidade para que o fato não se repita, sob pena de multa por desrespeito aos estatutos do Condomínio.' );*/
+
+
+/*tabela financeiro*/
+
+/*CREATE TABLE financeiro(
+id_financeiro INT AUTO_INCREMENT NOT NULL,
+valor_boletos_mensais_moradores DOUBLE NOT NULL,financeiro
+primary key(id_financeiro)
+);*/
+
+/*INSERT INTO financeiro (id_financeiro, valor_boletos_mensais_moradores)
+values (1, 100.0),
+       (default, 150.0),
+       (default, 200.0),
+       (default, 250.0);*/
+
+
+/*tabela moradores*/
+
+/*CREATE TABLE moradores(
+id_morador INT AUTO_INCREMENT NOT NULL,
+nome_completo VARCHAR(90) NOT NULL,
+data_de_nascimento DATE NOT NULL,
+CPF VARCHAR(45) NOT NULL,
+contato VARCHAR(45) NOT NULL,
+email VARCHAR(90) NOT NULL,
+proprietario_ou_inquilino CHAR NOT NULL,
+data_de_entrada DATE NOT NULL,
+data_de_saida DATE NOT NULL,
+id_financeiro INT,
+FOREIGN KEY(id_financeiro) REFERENCES financeiro(id_financeiro),
+PRIMARY KEY(id_morador)
+);*/
+
+/*ALTER TABLE moradores ADD COLUMN número_apartamento INT NOT NULL AFTER proprietario_ou_inquilino;
+
+ALTER TABLE moradores change proprietario_ou_inquilino prop_ou_inq char;
+
+ALTER TABLE moradores MODIFY data_de_saida DATE;*/
+
+/*ALTER TABLE moradores ADD id_condominio INT AFTER prop_ou_inq;
+
+ALTER TABLE moradores ADD FOREIGN KEY (id_condominio) REFERENCES condominio(id_condominio);*/
+
+/*INSERT INTO moradores (id_morador, nome_completo, data_de_nascimento, CPF, contato, email, prop_ou_inq , número_apartamento, data_de_entrada, data_de_saida, id_financeiro)
+values (1, 'Roberto Moreno Silva', '1970-01-05', '458.190.432-05', '(11) 97779-4713', 'Roberto.silva@gmail.com', 'P' , 3, '2014-09-01', null, 1);*/
+
+/*SELECT m.id_morador, m.nome_completo, m.data_de_nascimento, m.CPF, m.contato, m.email, m.prop_ou_inq, m.número_apartamento, m.data_de_entrada, m.data_de_saida, f.id_financeiro, f.valor_boletos_mensais_moradores
+FROM moradores m
+JOIN financeiro f
+ON m.id_financeiro = f.id_financeiro;*/
+
+
+/*INSERT INTO moradores (id_morador, nome_completo, data_de_nascimento, CPF, contato, email, prop_ou_inq , número_apartamento, data_de_entrada, data_de_saida, id_financeiro)
+VALUES (2, 'Thiago Oliveira', '1994-03-03', '483.253.940-98', '(11) 94367-8976', 'Thiago.ol@hotmail.com', 'P', 1, '2019-03-01', NULL, 4),
+       (3, 'Cassia Aquino', '1980-07-21', '756.495.384.12', '(11) 96574-4392', 'Cassia.aquino@hotmail.com', 'P', 2, '2021-04-22', NULL, 2),
+       (4, 'Maria Rosa', '1988-12-12', '485.364.879-76', '(11) 94353-7685', 'Maria.rosa@gmail.com', 'I', 3, '2017-12-01', NULL, 3),
+       (5, 'Bruno Camacho', '1990-01-01', '495.034.102-03', '(11) 96574-3049', 'Bruno.camacho@hotmail.com', 'I', 4, '2019-06-01', NULL, 4),
+       (6, 'Vinicius Barros', '1998-04-23', '458.019.023-89', '(11) 98504-3692', 'Vinicius.santos@gmai.com', 'P', 8, '2022-04-27', NULL, 2),
+       (7, 'Renan Cunha', '1996-11-11', '768.394.364-90', '(11) 94857-5849', 'Renan.cunha@gmail.com', 'P', 3, '2020-10-03', NULL, 1),
+       (8, 'Ramon Brito', '2000-09-09', '456.384.293-98', '(11) 95403-0293', 'Ramon.Brito@hotimal.com', 'P', 7, '2019-03-10', NULL, 1);*/
+
+/*update moradores set id_condominio = 1 where id_morador = 1;
+update moradores set id_condominio = 2 where id_morador = 2;
+update moradores set id_condominio = 3 where id_morador = 3;
+update moradores set id_condominio = 4 where id_morador = 4;
+update moradores set id_condominio = 5 where id_morador = 5;
+update moradores set id_condominio = 7 where id_morador = 6;
+update moradores set id_condominio = 6 where id_morador = 7;
+update moradores set id_condominio = 1 where id_morador = 8*/
+
+/*INSERT INTO moradores (id_morador, nome_completo, data_de_nascimento, CPF, contato, email, prop_ou_inq , id_condominio, número_apartamento, data_de_entrada, data_de_saida, id_financeiro)
+VALUES (9, 'Pedro Silas', '2001-09-09', '348.938.384-03', '(11) 94362-3940', 'Pedro.silas@gmail.com', 'I', 1, 8, '2022-01-15', NULL,  1),
+       (10, 'Livia Castro', '1998-02-05', '432.895.345-81', '(11) 98547-0129', 'Livia.castro@hotmail.com', 'P', 1, 1, '2021-10-03', NULL, 1),
+       (11, 'Otavio Gustavo', '1999-06-13', '394.324.123-84', '(11) 95403-1284', 'Otavio.gustavo@hotmail.com', 'I', 2, 3, '2022-01-09', NULL, 4),       
+       (12, 'Thiago Amadel', '1980-12-12', '323.495.213-32', '(11) 95643-0349', 'Thiago.amadel@gmail.com', 'I', 1, 2, '2014-09-09', NULL, 1),
+       (13, 'Luara Brito', '1985-01-01', '435.859.374-21', '(11) 94382-4390', 'Luara.brito@hotmail.com', 'P', 3, 6, '2017-12-30', NULL, 2),
+       (14, 'Chico Melo', '1982-08-08', '493.485.019-03', '(11) 93844-2934', 'Chico.melo@gmail.com', 'I', 3, 4, '2019-07-01', NULL, 2);*/
+       
+/*INSERT INTO moradores (id_morador, nome_completo, data_de_nascimento, CPF, contato, email, prop_ou_inq , id_condominio, número_apartamento, data_de_entrada, data_de_saida, id_financeiro)
+VALUES (15, 'Arthur Carlos', '1986-01-22', '394.485.193-90', '(11) 98473-0490', 'Arthur.carlos@gmail.com', 'I', 2, 2, '2013-09-01', NULL, 4),
+	   (16, 'Sila Gomes', '1971-12-13', '324.901.283-91', '(11) 93201-3942', 'Sila.gomes@gmail.com','I', 3, 1, '2019-10-09', NULL, 2),
+       (17, 'Cassia Ribeiro', '1981-12-05', '234.394.203-09', '(11) 98391-0390', 'Cassia.ribeiro@hotmail.com', 'P', 4, 2, '2019-04-23', NULL, 3),
+       (18, 'Danilo Santos', '1996-06-26', '199.394.263-30', '(11) 98437-0490', 'Danilo.santos@gmail.com', 'I', 4, 1, '2022-09-17', NULL, 3),
+       (19, 'Otavio Couto', '2000-09-15', '293.495.203-90', '(11) 93943-2034', 'Otavio.couto@hotmail.com', 'I', 4, 4, '2022-10-25', NULL, 3),
+       (20, 'Silvana Mathias', '1999-03-03', '394.506.283-12', '(11) 95648-3945', 'Silvana.mathias@gmail.com', 'P', 5, 1, '2021-01-09', NUll, 4),
+       (21, 'Vitor Seixas', '1994-02-19', '394.203.495-21', '(11) 97685-4039', 'Vitor.seixas@hotmail.com', 'P', 5, 2, '2016-09-14', NULL, 4),
+       (22, 'Carlos Nogueira', '1981-12-05', '234.950.192-49', '(11) 94852-1939', 'Carlos.nogueira@gmail.com', 'I', 5, 3, '2012-07-13', NULL, 4);*/
+       
+/*INSERT INTO moradores (id_morador, nome_completo, data_de_nascimento, CPF, contato, email, prop_ou_inq , id_condominio, número_apartamento, data_de_entrada, data_de_saida, id_financeiro)
+VALUES (23, 'André Ricardo', '1991-01-02', '302.495.203-12', '(11) 93221-5409', 'Andre.ricardo@gmail.com', 'I', 6, 2, '2019-09-17', NULL, 1),
+	    (DEFAULT, 'Wilson Nascimento', '1998-06-22', '304.123.978-02', '(11) 975943-1928', 'Wilson.nascimento@hotmail.com', 'P', 6, 1, '2022-09-16', NULL, 1),
+		(DEFAULT, 'Tereza Cristina', '1985-01-07', '403.102.394-44', '(11) 95847-0495', 'Tereza.cristina@hotmail.com', 'P', 6, 4, '2019-04-14', NULL, 1),
+		(DEFAULT, 'Camila Queiros', '1980-06-19', '421.950.203-42', '(11) 94032-9607', 'Camila.queiros@gmail.com', 'I', 7, 6, '2022-01-18', NULL, 2),
+		(DEFAULT, 'Rodrigo Paz', '1994-03-19', '394.102.495-01', '(11) 96532-5476', 'Rodrigo.paz@hotmail.com', 'I', 7, 4, '2021-09-18', NULL, 2),
+		(DEFAULT, 'Marlene Silva', '1978-11-19', '435.466.789-01', '(11) 96574-1039', 'Marlene.silva@gmail.com', 'P', 7, 2, '2013-01-04', NULL, 2),
+		(DEFAULT, 'Nicole Brandão', '1993-11-03', '940.304.102-65', '(11) 98454-1296', 'Nicole.brandao@hotmail.com', 'I', 7, 1, '2022-04-23', NULL, 2),
+		(DEFAULT, 'Gustavo Porto', '1998-09-15', '432.869.045-91', '(11) 93843-1029', 'Gustavo.porto@gmail.com', 'P', 8, 6, '2019-02-02', NULL, 1),
+		(DEFAULT, 'Celeste Silva', '1990-09-15', '405.304.195-95', '(11) 97695-1924', 'Celeste.silva@gmail.com', 'P', 8, 4, '2019-08-17', NULL, 1),
+		(DEFAULT, 'Miguel Cardoso', '1997-08-01', '304.103.923-39', '(11) 93849-1094', 'Miguel.cardoso@gmail.com', 'I', 3, 3, '2018-11-07', NULL, 2),
+		(DEFAULT, 'Keila Narcisio', '1999-05-19', '394.103.294-01', '(11) 90594-1039', 'keila.narcisio@hotmail.com', 'I', 4, 5, '2022-01-09', NULL, 3),
+		(DEFAULT, 'Ana Moraes', '1992-07-01', '304.102.304-01', '(11) 98649-1029', 'Ana.moraes@hotmail.com', 'P', 5, 5, '2020-01-22', NULL, 4 );*/
+       
+/*SELECT m.id_morador, m.nome_completo, m.data_de_nascimento, m.CPF, m.contato, m.email, m.prop_ou_inq, m.id_condominio, c.nome_condominio,
+m.número_apartamento, m.data_de_entrada, m.data_de_saida, m.id_financeiro, f.valor_boletos_mensais_moradores
+FROM moradores m
+JOIN condominio c
+ON m.id_condominio = c.id_condominio
+JOIN financeiro f
+ON m.id_financeiro = f.id_financeiro
+ORDER BY id_morador;*/
+
+
+/*tabela orçamentos*/
+
+/*CREATE TABLE orçamentos(
+id_orçamento INT AUTO_INCREMENT NOT NULL,
+tipo_de_serviço	LONGTEXT NOT NULL,
+valor_orçamento DOUBLE NOT NULL,
+data_inicial_reforma DATE NOT NULL,
+data_final_reforma DATE NOT NULL,
+PRIMARY KEY(id_orçamento)
+);*/
+
+/*INSERT INTO orçamentos(id_orçamento, tipo_de_serviço, valor_orçamento, data_inicial_reforma, data_final_reforma)
+VALUES (1, 'Pintura condominio', '14.500,00' , '2022-01-04', '2022-02-18');*/
+
+/*INSERT INTO orçamentos(id_orçamento, tipo_de_serviço, valor_orçamento, data_inicial_reforma, data_final_reforma)
+VALUES(2, 'Reforma telhado', '2.500,00', '2021-10-26', '2021-11-04'),
+	  (3, 'Reforma calçada', '1.750,00', '2022-01-13', '2022-01-16'),
+      (4, 'Reforma azuleijo', '3.000,00', '2022-04-01', '2022-04-05'),
+      (5, 'Reforma cobertura', '4.000,00', '2019-07-01', '2019-07-15'),
+      (6, 'Troca Lixeira', '150,00', '2022-06-01', '2022-06-01'),
+      (7, 'Troca azuleijo garagem', '7.500,00', '2021-12-06', '2021-12-22'),
+      (8, 'Pintura condominio', '11.500,00', '2018-03-03', '2018-03-22');*/
+
+
+/*tabela recursos humanos*/
+
+/*CREATE TABLE recursos_humanos(
+id_recursos_humanos INT AUTO_INCREMENT NOT NULL,
+tipo_contrato INT NOT NULL,
+descrição_contrato LONGTEXT NOT NULL,
+PRIMARY KEY (id_recursos_humanos)
+);*/
+
+/*INSERT recursos_humanos(id_recursos_humanos, tipo_contrato, descrição_contrato)
+VALUES (1, 1, 'Contrato de prestação de Serviços inclui 01 (um) limpeza por mês na area comum do condominio, liquidação das contas da area comum do condominio e rateio dos valores cobrado nos boletos mensais do moradores');*/
+
+/*INSERT recursos_humanos(id_recursos_humanos, tipo_contrato, descrição_contrato)
+VALUES (2, 2, 'Contrato de prestação de Serviços inclui 02 (dois) limpezas por mês na area comum do condominio, liquidação das contas da area comum do condominio e rateio dos valores cobrado nos boletos mensais do moradores'),
+	   (3, 3, 'Contrato de prestação de Serviços inclui 03 (três) limpezas por mês na area comum do condominio, liquidação das contas da area comum do condominio e rateio dos valores cobrado nos boletos mensais do moradores'),
+       (4, 4, 'Contrato de prestação de Serviços inclui 04 (quatro) limpezas por mês na area comum do condominio, liquidação das contas da area comum do condominio e rateio dos valores cobrado nos boletos mensais do moradores');*/
+  
+
+/*tabela condominio*/
+
+/*CREATE TABLE condominio(
+id_condominio INT AUTO_INCREMENT NOT NULL,
+nome_condominio VARCHAR(90) NOT NULL,
+endereço VARCHAR(90) NOT NULL,
+número INT NOT NULL,
+sindico VARCHAR(90) NOT NULL,
+quantidade_apartamentos INT NOT NULL,
+data_ultima_assembleia DATE NOT NULL,
+data_proxima_assembleia DATE NOT NULL,
+contas_a_pagar INT NOT NULL,
+contas_a_receber INT NOT NULL,
+multas_condominio INT NOT NULL,
+id_morador INT,
+FOREIGN KEY(id_morador) REFERENCES moradores(id_morador),
+id_recursos_humanos INT,
+FOREIGN KEY(id_recursos_humanos) REFERENCES recursos_humanos(id_recursos_humanos),
+id_orçamento INT,
+FOREIGN KEY(id_orçamento) REFERENCES orçamentos(id_orçamento),
+id_administrativo INT,
+FOREIGN KEY(id_administrativo) REFERENCES administrativo(id_administrativo),
+PRIMARY KEY(id_condominio)
+);*/
+
+/*ALTER TABLE condominio DROP FOREIGN KEY condominio_ibfk_1;
+
+ALTER TABLE condominio DROP id_morador;*/
+
+
+/*INSERT INTO condominio (id_condominio, nome_condominio, endereço, número, sindico, quantidade_apartamentos, data_ultima_assembleia, data_proxima_assembleia, contas_a_pagar, contas_a_receber, multas_condominio, id_recursos_humanos, id_orçamento, id_administrativo)
+VALUES (1, 'Condominio Maracanã', 'Rua das Rosas', 441, 'Roberto Moreno Silva', 8, '2021-04-04', '2022-04-06', 2, 1, 1, 1, 1, 1);*/
+
+/*INSERT INTO condominio (id_condominio, nome_condominio, endereço, número, sindico, quantidade_apartamentos, data_ultima_assembleia, data_proxima_assembleia, contas_a_pagar, contas_a_receber, multas_condominio, id_recursos_humanos, id_orçamento, id_administrativo)
+VALUES (2, 'Condominio Jequié', 'Rua Cipreste', 44, 'Thiago Oliveira', 10, '2022-06-06', '2023-06-01', 2, 4, 1, 3, 5, 3);*/
+
+/*ALTER TABLE condominio modify multas_condominio INT;*/
+
+/*INSERT INTO condominio (id_condominio, nome_condominio, endereço, número, sindico, quantidade_apartamentos, data_ultima_assembleia, data_proxima_assembleia, contas_a_pagar, contas_a_receber, multas_condominio, id_recursos_humanos, id_orçamento, id_administrativo)
+VALUES (3, 'Condominio Guaporé', 'Rua Henrique dias', 334, 'Cassia Aquino', 4, '2022-01-06', '2023-01-08', 1, 4, NULL, 2, 7, NULL),
+	   (4, 'Condominio Anhanguera', 'Rua Mirante', 144, 'Maria Rosa', 4, '2021-12-12', '2022-12-08', 1, 3, 1, 2, 8, 2),
+       (5, 'Condominio Catingal', 'Rua José Freire', 12, 'Bruno Camacho', 6, '2021-11-15', '2022-11-18', 3, 1, NULL, 1, 2, NULL);*/
+       
+/*INSERT INTO condominio (id_condominio, nome_condominio, endereço, número, sindico, quantidade_apartamentos, data_ultima_assembleia, data_proxima_assembleia, contas_a_pagar, contas_a_receber, multas_condominio, id_recursos_humanos, id_orçamento, id_administrativo)
+VALUES (6, 'Condominio Juquia', 'Rua Portugal', 596, 'Renan Cunha', 4, '2021-12-27', '2022-12-28', 4, 1, NULL, 2, 3, NULL),
+	   (7, 'Condominio Curupaiti', 'Rua Alambra', 11, 'Vinicius Barros', 4, '2021-12-01', '2022-12-04', 2, 2, NULL, 3, 4, NULL);
+	   (8, 'Condominio Timbé', 'Rua Araguaí', 22, 'Pedro Silas', 3, '2021-10-30', '2022-10-30', 1, 3, NULL, 4, 6, NULL);*/
+       
+
+/*UPDATE condominio SET multas_condominio = 1 WHERE id_condominio = 7;
+UPDATE condominio SET id_administrativo = 4 WHERE id_condominio = 7;*/
+
+/*UPDATE condominio SET multas_condominio = 1 WHERE id_condominio = 8;
+UPDATE condominio SET id_administrativo = 5 WHERE id_condominio = 8;*/
+
+
+/*SELECT c.id_condominio, c.nome_condominio, c.endereço, c.número, c.sindico, c.quantidade_apartamentos, c.data_ultima_assembleia, c.data_proxima_assembleia,
+c.contas_a_pagar, c.contas_a_receber, c.multas_condominio, c.id_recursos_humanos, r.descrição_contrato,c.id_orçamento, o.tipo_de_serviço, c.id_administrativo
+FROM condominio c
+JOIN recursos_humanos r
+ON c.id_recursos_humanos = r.id_recursos_humanos
+JOIN orçamentos o
+ON c.id_orçamento = o.id_orçamento
+ORDER BY id_condominio;*/
